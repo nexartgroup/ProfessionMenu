@@ -1,0 +1,295 @@
+-- Locales.lua
+-- ---------------------------------------------------------------------------
+-- Texte des Addons. Berufsnamen und Zaubernamen kommen vom Spiel selbst
+-- (GetSpellInfo, GetSkillLineInfo) und stehen deshalb nicht hier.
+-- Fehlt ein Schluessel in einer Sprache, gilt der englische Text.
+-- ---------------------------------------------------------------------------
+
+local ADDON, PM = ...
+
+local texts = {}
+
+texts.enUS = {
+   title = "Professions",
+   cat_craft = "Crafting",
+   cat_refine = "Processing",
+   cat_gather = "Gathering",
+   cat_secondary = "Secondary",
+   cat_abilities = "Abilities",
+   hint_open = "Left-click: open",
+   hint_track = "Left-click: start tracking",
+   hint_use = "Left-click: use",
+   hint_target = "Left-click: use, then pick an item",
+   hint_moved = "The search is in the Abilities list - left-click shows your skills",
+   hint_passive = "Nothing to open - left-click shows your skills",
+   hint_missing = "Spell not found - left-click shows your skills",
+   hint_skills = "Right-click: skills window",
+   skill = "Skill: %d / %d",
+   none = "No professions learned",
+   combat = "Not available in combat",
+   mover = "Professions button",
+   menuHint = "Click: open list",
+   -- Befehle
+   help = "/berufe [toggle] || list || sort cat||alpha||rank || headers on||off || ranks on||off || direction auto||up||down || compact off||button||all || abilities on||off || scale <0.5-2> || unlock || lock || reset || debug",
+   listHeader = "Detected skills:",
+   listMatched = "  %s -> %s (%d/%d)",
+   listUnmatched = "  %s (%d/%d) - not a known profession",
+   listNone = "  (no skills read)",
+   listNoAction = "no action",
+   listAbility = "  ability: %s (%s, list: %s)",
+   listAsAbility = "see abilities",
+   setSort = "Sorting: %s",
+   setHeaders = "Category headings: %s",
+   setRanks = "Skill levels: %s",
+   setDirection = "Opening direction: %s",
+   setCompact = "Display: %s",
+   setAbilities = "Active abilities in the list: %s",
+   compactoff = "with text",
+   compactbutton = "icon only: button",
+   compactall = "icon only: button and list",
+   setScale = "Scale: %.2f",
+   scaleRange = "Scale must be between 0.5 and 2.",
+   scaleElvUI = "With ElvUI the size follows ElvUI's UI scale (Scale option is for standalone use).",
+   opt_title = "Professions menu",
+   opt_desc = "Button with a list of your learned professions.",
+   opt_sort = "Sorting",
+   opt_headers = "Category headings",
+   opt_ranks = "Show skill levels",
+   opt_direction = "Opening direction",
+   opt_compact = "Display",
+   opt_abilities = "Include active abilities",
+   opt_abilities_desc = "Adds a category with Fishing, Disenchant, Prospecting, Milling, Campfire and the tracking searches (only the ones you know). Fishing moves here from Secondary; Mining and Herbalism then only show the skills window, their searches become rows of their own.",
+   opt_move = "Move the button (/moveui)",
+   on = "on",
+   off = "off",
+   sortcat = "by category",
+   sortalpha = "alphabetical",
+   sortrank = "by skill level",
+   dirauto = "automatic",
+   dirup = "up",
+   dirdown = "down",
+   unlocked = "Button unlocked: drag it with the left mouse button, /berufe lock when done.",
+   locked = "Button locked.",
+   lockedElvUI = "ElvUI is active: move the button with /moveui (mover 'Professions button').",
+   resetDone = "Position reset.",
+   debugOn = "Debug messages on.",
+   debugOff = "Debug messages off.",
+   error = "Error in %s: %s",
+}
+
+texts.deDE = {
+   title = "Berufe",
+   cat_craft = "Herstellung",
+   cat_refine = "Weiterverarbeitung",
+   cat_gather = "Sammeln",
+   cat_secondary = "Nebenberufe",
+   cat_abilities = "Fähigkeiten",
+   hint_open = "Linksklick: öffnen",
+   hint_track = "Linksklick: Suche aktivieren",
+   hint_use = "Linksklick: benutzen",
+   hint_target = "Linksklick: benutzen, danach Gegenstand wählen",
+   hint_moved = "Die Suche steht bei den Fähigkeiten - Linksklick zeigt deine Fertigkeiten",
+   hint_passive = "Nichts zu öffnen - Linksklick zeigt deine Fertigkeiten",
+   hint_missing = "Zauber nicht gefunden - Linksklick zeigt deine Fertigkeiten",
+   hint_skills = "Rechtsklick: Fertigkeitenfenster",
+   skill = "Fertigkeit: %d / %d",
+   none = "Keine Berufe erlernt",
+   combat = "Im Kampf nicht verfügbar",
+   mover = "Berufe-Knopf",
+   menuHint = "Klick: Liste öffnen",
+   help = "/berufe [toggle] || list || sort cat||alpha||rank || headers on||off || ranks on||off || direction auto||up||down || compact off||button||all || abilities on||off || scale <0.5-2> || unlock || lock || reset || debug",
+   listHeader = "Erkannte Fertigkeiten:",
+   listMatched = "  %s -> %s (%d/%d)",
+   listUnmatched = "  %s (%d/%d) - kein bekannter Beruf",
+   listNone = "  (keine Fertigkeiten gelesen)",
+   listNoAction = "keine Aktion",
+   listAbility = "  Fähigkeit: %s (%s, Liste: %s)",
+   listAsAbility = "bei den Fähigkeiten",
+   setSort = "Sortierung: %s",
+   setHeaders = "Kategorie-Überschriften: %s",
+   setRanks = "Fertigkeitsstufen: %s",
+   setDirection = "Öffnungsrichtung: %s",
+   setCompact = "Darstellung: %s",
+   setAbilities = "Aktive Fähigkeiten in der Liste: %s",
+   compactoff = "mit Text",
+   compactbutton = "nur Symbol: Knopf",
+   compactall = "nur Symbol: Knopf und Liste",
+   setScale = "Skalierung: %.2f",
+   scaleRange = "Die Skalierung muss zwischen 0.5 und 2 liegen.",
+   scaleElvUI = "Mit ElvUI richtet sich die Größe nach der UI-Skalierung von ElvUI (die Skalierung gilt nur ohne ElvUI).",
+   opt_title = "Berufe-Menü",
+   opt_desc = "Knopf mit einer Liste deiner erlernten Berufe.",
+   opt_sort = "Sortierung",
+   opt_headers = "Kategorie-Überschriften",
+   opt_ranks = "Fertigkeitsstufen anzeigen",
+   opt_direction = "Öffnungsrichtung",
+   opt_compact = "Darstellung",
+   opt_abilities = "Aktive Fähigkeiten einbeziehen",
+   opt_abilities_desc = "Fügt eine Kategorie mit Angeln, Entzaubern, Sondieren, Mahlen, Lagerfeuer und den Suchzaubern hinzu (nur, was du kennst). Angeln wandert aus den Nebenberufen hierher; Bergbau und Kräuterkunde zeigen dann nur das Fertigkeitenfenster, ihre Suchen werden eigene Zeilen.",
+   opt_move = "Knopf verschieben (/moveui)",
+   on = "an",
+   off = "aus",
+   sortcat = "nach Kategorie",
+   sortalpha = "alphabetisch",
+   sortrank = "nach Fertigkeitsstufe",
+   dirauto = "automatisch",
+   dirup = "nach oben",
+   dirdown = "nach unten",
+   unlocked = "Knopf entsperrt: mit der linken Maustaste ziehen, danach /berufe lock.",
+   locked = "Knopf gesperrt.",
+   lockedElvUI = "ElvUI ist aktiv: Knopf mit /moveui (Ankerpunkte) verschieben, Anker 'Berufe-Knopf'.",
+   resetDone = "Position zurückgesetzt.",
+   debugOn = "Debug-Meldungen an.",
+   debugOff = "Debug-Meldungen aus.",
+   error = "Fehler in %s: %s",
+}
+
+texts.frFR = {
+   title = "Métiers",
+   cat_craft = "Fabrication",
+   cat_refine = "Transformation",
+   cat_gather = "Récolte",
+   cat_secondary = "Secondaires",
+   hint_open = "Clic gauche : ouvrir",
+   hint_track = "Clic gauche : activer le repérage",
+   hint_use = "Clic gauche : utiliser",
+   hint_passive = "Rien à ouvrir - clic gauche affiche vos compétences",
+   hint_skills = "Clic droit : fenêtre des compétences",
+   skill = "Compétence : %d / %d",
+   none = "Aucun métier appris",
+   combat = "Indisponible en combat",
+   menuHint = "Clic : ouvrir la liste",
+   mover = "Bouton des métiers",
+   cat_abilities = "Capacités",
+   hint_target = "Clic gauche : utiliser, puis choisir un objet",
+   hint_moved = "La recherche se trouve dans les capacités - clic gauche affiche vos compétences",
+}
+
+texts.esES = {
+   title = "Profesiones",
+   cat_craft = "Fabricación",
+   cat_refine = "Procesado",
+   cat_gather = "Recolección",
+   cat_secondary = "Secundarias",
+   hint_open = "Clic izquierdo: abrir",
+   hint_track = "Clic izquierdo: activar rastreo",
+   hint_use = "Clic izquierdo: usar",
+   hint_passive = "Nada que abrir - clic izquierdo muestra tus habilidades",
+   hint_skills = "Clic derecho: ventana de habilidades",
+   skill = "Habilidad: %d / %d",
+   none = "No has aprendido profesiones",
+   combat = "No disponible en combate",
+   menuHint = "Clic: abrir la lista",
+   mover = "Botón de profesiones",
+   cat_abilities = "Habilidades",
+   hint_target = "Clic izquierdo: usar, luego elegir un objeto",
+   hint_moved = "La búsqueda está en las habilidades - clic izquierdo muestra tus habilidades",
+}
+texts.esMX = texts.esES
+
+texts.ruRU = {
+   title = "Профессии",
+   cat_craft = "Производство",
+   cat_refine = "Переработка",
+   cat_gather = "Сбор",
+   cat_secondary = "Вспомогательные",
+   hint_open = "ЛКМ: открыть",
+   hint_track = "ЛКМ: включить отслеживание",
+   hint_use = "ЛКМ: использовать",
+   hint_passive = "Нечего открывать - ЛКМ показывает ваши навыки",
+   hint_skills = "ПКМ: окно навыков",
+   skill = "Навык: %d / %d",
+   none = "Нет изученных профессий",
+   combat = "Недоступно в бою",
+   menuHint = "ЛКМ: открыть список",
+   mover = "Кнопка профессий",
+   cat_abilities = "Способности",
+   hint_target = "ЛКМ: использовать, затем выбрать предмет",
+   hint_moved = "Поиск среди способностей - ЛКМ показывает ваши навыки",
+}
+
+texts.koKR = {
+   title = "전문 기술",
+   cat_craft = "제작",
+   cat_refine = "가공",
+   cat_gather = "채집",
+   cat_secondary = "보조 기술",
+   hint_open = "좌클릭: 열기",
+   hint_track = "좌클릭: 추적 시작",
+   hint_use = "좌클릭: 사용",
+   hint_passive = "열 것이 없음 - 좌클릭으로 기술 창 보기",
+   hint_skills = "우클릭: 기술 창",
+   skill = "숙련도: %d / %d",
+   none = "배운 전문 기술이 없습니다",
+   combat = "전투 중에는 사용할 수 없습니다",
+   menuHint = "클릭: 목록 열기",
+   mover = "전문 기술 버튼",
+   cat_abilities = "능력",
+   hint_target = "좌클릭: 사용 후 아이템 선택",
+   hint_moved = "추적은 능력 목록에 있음 - 좌클릭으로 기술 창 보기",
+}
+
+texts.zhCN = {
+   title = "专业技能",
+   cat_craft = "制造",
+   cat_refine = "加工",
+   cat_gather = "采集",
+   cat_secondary = "副技能",
+   hint_open = "左键：打开",
+   hint_track = "左键：开启追踪",
+   hint_use = "左键：使用",
+   hint_passive = "无可打开 - 左键查看技能",
+   hint_skills = "右键：技能窗口",
+   skill = "技能：%d / %d",
+   none = "尚未学习专业技能",
+   combat = "战斗中不可用",
+   menuHint = "点击：打开列表",
+   mover = "专业技能按钮",
+   cat_abilities = "能力",
+   hint_target = "左键：使用，然后选择物品",
+   hint_moved = "追踪在能力列表中 - 左键查看技能",
+}
+
+texts.zhTW = {
+   title = "專業技能",
+   cat_craft = "製造",
+   cat_refine = "加工",
+   cat_gather = "採集",
+   cat_secondary = "副技能",
+   hint_open = "左鍵：開啟",
+   hint_track = "左鍵：開啟追蹤",
+   hint_use = "左鍵：使用",
+   hint_passive = "無可開啟 - 左鍵查看技能",
+   hint_skills = "右鍵：技能視窗",
+   skill = "技能：%d / %d",
+   none = "尚未學習專業技能",
+   combat = "戰鬥中無法使用",
+   menuHint = "點擊：開啟列表",
+   mover = "專業技能按鈕",
+   cat_abilities = "能力",
+   hint_target = "左鍵：使用，然後選擇物品",
+   hint_moved = "追蹤在能力列表中 - 左鍵查看技能",
+}
+
+PM.texts = texts
+
+local L = {}
+PM.L = L
+
+-- Sprache waehlen (PM.SetLocale ist fuer die Tests da).
+function PM.SetLocale(locale)
+   local active = texts[locale] or {}
+   PM.locale = texts[locale] and locale or "enUS"
+   setmetatable(L, {
+      __index = function(_, key)
+         -- Kategorie "Faehigkeiten": das Wort des Clients (GlobalString ABILITIES), sonst unser Text
+         if key == "cat_abilities" then
+            local client = rawget(_G, "ABILITIES")
+            if type(client) == "string" and client ~= "" then return client end
+         end
+         return active[key] or texts.enUS[key] or key
+      end,
+   })
+end
+
+PM.SetLocale(GetLocale and GetLocale() or "enUS")
