@@ -1,20 +1,22 @@
-## Interface: 30300
+## Interface: 16001
 ## Title: Profession Menu
 ## Title-deDE: Berufe-Menü
-## Notes: A "Professions" button that unrolls a list of your learned professions; click one to open it. Looks like ElvUI, works without it.
-## Notes-deDE: Ein Berufe-Knopf, der eine Liste deiner erlernten Berufe ausklappt; ein Klick öffnet den Beruf. Passt zu ElvUI, geht auch ohne.
+## Notes: A "Professions" button that unrolls a list of your learned professions with their activities (fishing, disenchanting, tracking ...) and the camp objects (campfire, tent ...). For WoW: Forever.
+## Notes-deDE: Ein Berufe-Knopf, der eine Liste deiner erlernten Berufe ausklappt, samt ihrer Tätigkeiten (Angeln, Entzaubern, Suchen ...) und der Lager-Objekte (Lagerfeuer, Zelt ...). Für WoW: Forever.
 ## Author: nexartgroup
-## Version: 1.0
+## Version: 1.1-forever
 ## X-License: MIT
 ## X-Website: https://github.com/nexartgroup/ProfessionMenu
-## OptionalDeps: ElvUI
+## IconTexture: Interface\Icons\Trade_BlackSmithing
 ## SavedVariables: ProfessionMenuDB
 ## DefaultState: enabled
 
 Locales.lua
 Data.lua
 Core.lua
+Camp.lua
 Skin.lua
 UI.lua
+Diag.lua
 Main.lua
 Options.lua
